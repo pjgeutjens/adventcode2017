@@ -24,25 +24,22 @@ func main() {
 		{286,2076,243,939,399,451,231,2187,2295,453,1206,2468,2183,230,714,681},
 		{3111,2857,2312,3230,149,3082,408,1148,2428,134,147,620,128,157,492,2879},
 	}
-	i,j, rowmax, rowmin, rowdiff, checksum int
+	i,j,k,checksum int
+	division float64
 	)
 
 	for i = 0;i < 16;i++ {
-		rowmax = 0
-		rowmin = 9999
 		for j=0;j<16;j++ {
-			if a[i][j] < rowmin {
-				rowmin = a[i][j]
-			}
-			if a[i][j] > rowmax {
-				rowmax = a[i][j]
+			for k=0; k<16; k++ {
+				if j == k {
+					continue
+				}
+				division = float64(a[i][j]) / float64(a[i][k])
+				if division == float64(int64(division)) {
+					checksum += int(division)
+				} 
 			}
 		}
-		rowdiff = rowmax - rowmin
-		fmt.Printf("row %d: %d - %d = %d\n", i, rowmax, rowmin,rowdiff)
-		checksum += rowdiff
-		fmt.Printf("checksum: %d\n", checksum)
-
 	}
 	fmt.Printf("checksum: %d\n", checksum)
 }
